@@ -1,23 +1,85 @@
-<!DOCTYPE html>
 <html>
-    <body>
-        <h1>Welcome to YoungMay's http server!</h1>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <head>
+        <body style="background-color:pink;"> 
+        <title>在线日期计算器</title>
+        <script>
+            var hzWeek= new Array("日","一","二","三","四","五","六","日");function cweekday(wday){return hzWeek[wday];}
+            function cala()
+            {
+                y=document.getElementById("SY").value;
+                m=document.getElementById("SM").value;
+                d=document.getElementById("SD").value;
+                ddd=document.getElementById("decday").value;
 
-        <form action="/cgi/insertdata" method="GET">
-            name:<br>
-            <input type="TEXT" name="name" value="youngjack"><br>
-            sex:<br>
-            <input type="TEXT" name="sex" value="man"><br>
-            tel:<br>
-            <input type="TEXT" name="tel" value="123455678901"><br>
-            <br>
-           
-            <input type="SUBMIT" value="Submit">
+                ttt=new Date(y,m-1,d).getTime()+ddd*24000*3600;
 
-        </form> 
-        <br><br>
-        <a href="http://192.168.43.35:8080/cgi/selectdata">select</a><br><br>
-        <img src="/image/jony-jack-tt.jpg" alt="jonyj & youngjack & tt">
+                theday=new Date();
+                theday.setTime(ttt);
+                document.getElementById("result1").innerHTML=theday.getFullYear()+"年"+(1+theday.getMonth())+"月"+theday.getDate()+"日"+"星期"+cweekday(theday.getDay());
+            }
+            function calb()
+            {
+                y2=document.getElementById("SY2").value;
+                m2=document.getElementById("SM2").value;
+                d2=document.getElementById("SD2").value;
+
+                y3=document.getElementById("SY3").value;
+                m3=document.getElementById("SM3").value;
+                d3=document.getElementById("SD3").value;
+
+                day2=new Date(y2,m2-1,d2);
+                day3=new Date(y3,m3-1,d3);
+
+                document.getElementById("result2").innerHTML=(day3-day2)/86400000;
+            }
+        </script>
+        
+        <style>
+            marquee{
+                     color:black;               
+            }       
+        </style>
+        <style type="text/css"></style>
     
-    </body>
-</html>
+</head>
+
+        <body>
+            <marquee direction="up" behavior="slide" height="80"> <h1 align="center">Welcome to YoungMay's Date Calculator!</h1></marquee>
+            <!--<a href="http://www.beijing-time.org/">北京时间网</a>-->
+            <br>
+            <br>
+            <b>计算两个日期的差：</b>
+            <br>
+            　　<input size=8 id=SY2 value=2018>年
+                <input size=4 id=SM2 value=5>月
+                <input size=4 id=SD2 value=27>日
+            <br>
+            和　<input size=8 id=SY3  value=2019>年
+            <input size=4 id=SM3 value=1>月
+            <input size=4 id=SD3 value=1>日
+            <br>相差：
+            <span id=result2></span>天
+            <br>
+            <input type=button value="计算" onClick="calb()">
+            <br>
+            <br>
+            <br>
+
+            <b>推算几天后的日期(默认向后推算)：</b>
+            <br>
+            　和
+            <input size=8 id=SY value=2018>年
+            <input size=4 id=SM value=5>月
+            <input size=4 id=SD value=27>日
+            <br>相差
+            <input size=8 id=decday>天
+            （输入负数则往前计算）
+            <br>是：
+            <span id=result1></span>
+            <br>
+            <input type=button value="计算" onClick="cala()">
+            <br><br>
+      
+        </body>
+    </html>
